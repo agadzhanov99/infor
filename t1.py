@@ -35,8 +35,8 @@ pygame.draw.line(screen,(0, 0, 0),(408,206),(408,111),width=8)
 points=((410,202), (428,157), (410,111), (466,157))
 sc=(222, 213, 153)
 pygame.draw.polygon(screen,sc, points, width=0)
-pygame.draw.polygon(screen,(0, 0, 0), points, width=2)
-pygame.draw.line(screen, (0, 0, 0), (428,157), (466,157), width=1)
+pygame.draw.polygon(screen,(165, 175, 140), points, width=2)
+pygame.draw.line(screen, (173, 166, 119), (428,157), (466,157), width=1)
 pygame.draw.line(screen,(0, 0, 0),(408,206),(408,111),width=8)
 
 # солнце
