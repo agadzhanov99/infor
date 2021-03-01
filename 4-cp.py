@@ -12,7 +12,6 @@ FPS = 60
 screen_width = 1400
 screen_height = 720
 screen = pygame.display.set_mode((screen_width, screen_height))
-image = pygame.image.load('countryball.png')
 
 score = 0
 RED = (255, 0, 0)
@@ -103,7 +102,7 @@ def move_balls(balls_pos):  # Функция перемещает шары в с
 
 def touch(ball1: object, ball2: object):  # функция проверяет касание шаров
     flag = False
-    if ((ball1[0] - ball2[0]) ^ 2 + (ball1[1] - ball2[1]) ^ 2 <= (ball1[2] + ball2[2]) ^ 2):
+    if (int((ball1[0] - ball2[0])) ^ 2 + int((ball1[1] - ball2[1])) ^ 2 <= int((ball1[2] + ball2[2])) ^ 2):
         flag = True
     return flag
 
@@ -115,11 +114,12 @@ def reflect(ball1: object, ball2: object) -> object:
     vy = float(ball1[5])
     if (vx * x + vy * y > 0):
         # (vx, vy) = (vx, vy) - 2.0 * (x, y) / (x^2.0 + y ^ 2.0) * (vx * x + vy * y)
-        vx = vx - 2.0 * x / (x ^ 2 + y ^ 2) * (vx * x + vy * y)
-        vy = vy - 2.0 * y / (x ^ 2.0 + y ^ 2.0) * (vx * x + vy * y)
+        vx = vx - 2.0 * x / ((int(x) ^ 2 + int(y) ^ 2) * (vx * x + vy * y) +1)
+        vy = vy - 2.0 * y / ((int(x) ^ 2 + int(y) ^ 2) * (vx * x + vy * y) +1)
         vx = int(vx)
         vy = int(vy)
-    (vx, vy) = (ball1[4], ball1[5])
+    ball1[4] = vx
+    ball1[5] = vy
     return ball1
 
 
@@ -143,7 +143,7 @@ while finished < time * FPS:
     for i in range(len(balls_pos)):
         for j in range(len(balls_pos)):
             if (i != j) and (touch(ball1=balls_pos[i], ball2=balls_pos[j])):
-                balls_pos[i] = reflect(balls_pos[i], balls_pos[j])
+                balls_pos[i] = reflect(ball1=balls_pos[i], ball2=balls_pos[j])
 
     pygame.display.update()
     screen.fill(BLACK)
