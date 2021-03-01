@@ -51,17 +51,6 @@ def hit_ball(func_click, balls_pos):  # Функция проверяет, бы�
             balls_pos.append(new_ball())
             score += 1
 
-
-def hit_square(func_click, square_pos):  # Функция проверяет, был ли клик внутри квадрата, если да, то прибавляет 3 очка
-    global score
-    for i in range(len(square_pos)):
-        if 0 < (func_click[0] - square_pos[i][0]) < square_pos[i][2]:
-            if 0 < (func_click[1] - square_pos[i][1]) < square_pos[i][2]:
-                del square_pos[i]
-                square_pos.append(new_square())
-                score += 3
-
-
 def score_show(score):  # Функция выводит количество очков
     f1 = pygame.font.Font(None, 36)
     text1 = f1.render('Score: ' + str(score), True, (180, 0, 0))
@@ -69,7 +58,6 @@ def score_show(score):  # Функция выводит количество о�
 
 
 balls_pos = []
-square_pos = []
 
 # Циклы добавляют параметры шаров и квадратов в массив.
 for i in range(15):
@@ -133,7 +121,6 @@ while finished < time * FPS:
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
             hit_ball(click(event), balls_pos)
-            hit_square(click(event), square_pos)
         if event.type == pygame.QUIT:
             finished = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
