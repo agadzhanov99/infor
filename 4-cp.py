@@ -51,6 +51,7 @@ def hit_ball(func_click, balls_pos):  # Функция проверяет, бы�
             balls_pos.append(new_ball())
             score += 1
 
+
 def score_show(score):  # Функция выводит количество очков
     f1 = pygame.font.Font(None, 36)
     text1 = f1.render('Score: ' + str(score), True, (180, 0, 0))
@@ -102,8 +103,11 @@ def reflect(ball1: object, ball2: object) -> object:
     vy = float(ball1[5])
     if (vx * x + vy * y > 0):
         # (vx, vy) = (vx, vy) - 2.0 * (x, y) / (x^2.0 + y ^ 2.0) * (vx * x + vy * y)
-        vx = vx - 2.0 * x / ((int(x) ^ 2 + int(y) ^ 2) * (vx * x + vy * y) +1)
-        vy = vy - 2.0 * y / ((int(x) ^ 2 + int(y) ^ 2) * (vx * x + vy * y) +1)
+        vx = vx - 2.0 * x / ((int(x) ^ 2 + int(y) ^ 2) * (vx * x + vy * y) + 1)
+        vy = vy - 2.0 * y / ((int(x) ^ 2 + int(y) ^ 2) * (vx * x + vy * y) + 1)
+        if vx < 5 :
+            vx = int(vx * 1.2)
+            vy = int(vy * 1.2)
         vx = int(vx)
         vy = int(vy)
     ball1[4] = vx
